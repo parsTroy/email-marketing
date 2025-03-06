@@ -19,7 +19,9 @@ export async function middleware(req: NextRequest) {
 
   // If user is not signed in, redirect to login
   if (!session) {
-    return NextResponse.redirect(new URL('/login', req.url));
+    const redirectUrl = new URL('/login', req.url);
+    redirectUrl.searchParams.set('redirectedFrom', req.nextUrl.pathname);
+    return NextResponse.redirect(redirectUrl);
   }
 
   return res;

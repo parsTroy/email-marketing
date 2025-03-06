@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -27,6 +28,7 @@ const formSchema = z.object({
 });
 
 export function LoginForm() {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -41,7 +43,7 @@ export function LoginForm() {
     setIsLoading(true);
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: values.email,
         password: values.password,
       });
@@ -52,15 +54,23 @@ export function LoginForm() {
           description: error.message,
           variant: "destructive",
         });
-      } else {
+      } else if (data?.session) {
         toast({
           title: "Success",
           description: "Welcome back!",
         });
-        // Refresh the page to update the session
-        window.location.href = "/dashboard";
+        // Force a hard refresh to ensure the session is properly set
+        router.refresh();
+        router.push("/dashboard");
+      } else {
+        toast({
+          title: "Error",
+          description: "No session was created. Please try again.",
+          variant: "destructive",
+        });
       }
-    } catch {
+    } catch (error) {
+      console.error("Login error:", error);
       toast({
         title: "Error",
         description: "Something went wrong. Please try again.",
