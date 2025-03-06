@@ -13,12 +13,12 @@ export default function SignUpPage() {
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
         <div className="absolute inset-0 bg-zinc-900" />
         <div className="relative z-20 flex items-center text-lg font-medium">
-          <Link href="/">Email Marketing Automation</Link>
+          <Link href="/">&ldquo;Email Marketing Automation&rdquo;</Link>
         </div>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              "This platform has transformed how we handle email marketing. The automation features have saved us countless hours."
+              &ldquo;This platform has transformed how we handle email marketing. The automation features have saved us countless hours.&rdquo;
             </p>
             <footer className="text-sm">Sofia Davis, CEO of Fashion Store</footer>
           </blockquote>

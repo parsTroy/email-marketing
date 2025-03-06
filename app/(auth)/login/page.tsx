@@ -13,12 +13,12 @@ export default function LoginPage() {
       <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex dark:border-r">
         <div className="absolute inset-0 bg-zinc-900" />
         <div className="relative z-20 flex items-center text-lg font-medium">
-          <Link href="/">Email Marketing Automation</Link>
+          <Link href="/">&ldquo;Email Marketing Automation&rdquo;</Link>
         </div>
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
             <p className="text-lg">
-              "The automation features have revolutionized our email marketing strategy. Highly recommended!"
+              &ldquo;The automation features have revolutionized our email marketing strategy. Highly recommended!&rdquo;
             </p>
             <footer className="text-sm">John Smith, Marketing Director</footer>
           </blockquote>
@@ -36,7 +36,7 @@ export default function LoginPage() {
           </div>
           <LoginForm />
           <p className="px-8 text-center text-sm text-muted-foreground">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link
               href="/signup"
               className="underline underline-offset-4 hover:text-primary"

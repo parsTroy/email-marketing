@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { Button } from "@/components/ui/button";
+import { Button } from "../ui/button";
 import {
   Form,
   FormControl,
@@ -13,10 +13,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { supabase } from "@/lib/supabase";
-import { toast } from "@/components/ui/use-toast";
+} from "../ui/form";
+import { Input } from "../ui/input";
+import { supabase } from "../../lib/supabase";
+import { toast } from "../ui/use-toast";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -66,7 +66,7 @@ export function SignUpForm() {
         });
         router.push("/login");
       }
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Something went wrong. Please try again.",
