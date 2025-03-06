@@ -43,26 +43,33 @@ export function LoginForm() {
     setIsLoading(true);
 
     try {
+      console.log("Attempting login...");
       const { data, error } = await supabase.auth.signInWithPassword({
         email: values.email,
         password: values.password,
       });
 
       if (error) {
+        console.error("Login error:", error);
         toast({
           title: "Error",
           description: error.message,
           variant: "destructive",
         });
       } else if (data?.session) {
+        console.log("Login successful, session:", data.session);
         toast({
           title: "Success",
           description: "Welcome back!",
         });
-        // Force a hard refresh to ensure the session is properly set
-        router.refresh();
-        router.push("/dashboard");
+        
+        // Wait a moment for the session to be properly set
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Use replace instead of push to prevent back button issues
+        router.replace("/dashboard");
       } else {
+        console.error("No session created");
         toast({
           title: "Error",
           description: "No session was created. Please try again.",
