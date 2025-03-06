@@ -32,7 +32,7 @@ export default function ContactPage() {
             Get in touch
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Have questions about our email marketing platform? We're here to help.
+            Have questions about our email marketing platform? We&apos;re here to help.
           </p>
         </div>
 
@@ -41,7 +41,7 @@ export default function ContactPage() {
             <CardHeader>
               <CardTitle>Contact Us</CardTitle>
               <CardDescription>
-                Fill out the form below and we'll get back to you as soon as possible.
+                Fill out the form below and we&apos;ll get back to you as soon as possible.
               </CardDescription>
             </CardHeader>
             <CardContent>
