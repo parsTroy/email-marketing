@@ -2,6 +2,8 @@ import { createMiddlewareClient } from '@supabase/auth-helpers-nextjs';
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+const publicRoutes = ['/', '/pricing', '/contact', '/login', '/signup'];
+
 export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({ req, res });
@@ -10,16 +12,14 @@ export async function middleware(req: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession();
 
-  // If user is not signed in and the current path is not / or /pricing or /contact,
-  // redirect the user to /login
-  if (!session && !['/', '/pricing', '/contact'].includes(req.nextUrl.pathname)) {
-    return NextResponse.redirect(new URL('/login', req.url));
+  // If the route is public, allow access
+  if (publicRoutes.includes(req.nextUrl.pathname)) {
+    return res;
   }
 
-  // If user is signed in and the current path is /login or /signup,
-  // redirect the user to /dashboard
-  if (session && ['/login', '/signup'].includes(req.nextUrl.pathname)) {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
+  // If user is not signed in, redirect to login
+  if (!session) {
+    return NextResponse.redirect(new URL('/login', req.url));
   }
 
   return res;
