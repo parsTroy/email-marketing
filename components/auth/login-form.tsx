@@ -59,7 +59,8 @@ export function LoginForm() {
           title: "Success",
           description: "Welcome back!",
         });
-        router.push("/dashboard");
+        // Refresh the page to update the session
+        window.location.href = "/dashboard";
       }
     } catch {
       toast({
